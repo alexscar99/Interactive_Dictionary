@@ -14,16 +14,16 @@ def get_definition(w):
     # Handle abbreviations and acronyms (USA, NATO, etc.)
     elif w.upper() in data:
         return data[w.upper()]
-    # Handle user typos to find a close match if no exact one
+    # Handle user typos by finding a close match
     elif len(get_close_matches(w, data.keys(), cutoff=0.8)) > 0:
         # Use string formatter as placeholder for the expression declared
         # after string. Return first close match from list.
         yes_or_no = input(
             'Did you mean %s instead? Enter Y if yes or N if no: ' %
             get_close_matches(w, data.keys())[0])
-        if yes_or_no == 'Y':
+        if yes_or_no == 'Y' or yes_or_no == 'y':
             return data[get_close_matches(w, data.keys())[0]]
-        elif yes_or_no == 'N':
+        elif yes_or_no == 'N' or yes_or_no == 'n':
             return 'The word does not exist. Please double check it.'
         else:
             return 'Entry was not understood.'
